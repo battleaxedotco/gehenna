@@ -1,6 +1,17 @@
 # gehenna
 
-Awesome ES6 polyfills for Adobe scripting, including:
+Awesome ES6 polyfills and mega helpers for for Adobe scripting
+
+## Installation
+
+```bash
+npm i gehenna
+```
+
+```js
+// To automatically load all utilies:
+async require('gehenna').default.init()
+```
 
 ### JSON
 
@@ -39,7 +50,3 @@ Awesome ES6 polyfills for Adobe scripting, including:
 - ~~Illustrator~~
 - ~~After Effects~~
 - ~~Photoshop~~
-
-## ~~Installation~~
-
-> Just organizing and securing the name for now
