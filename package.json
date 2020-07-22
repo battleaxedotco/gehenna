@@ -1,6 +1,6 @@
 {
   "name": "gehenna",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Awesome ES6 polyfills and mega utilities for Adobe scripting",
   "main": "index.js",
   "scripts": {
