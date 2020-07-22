@@ -1,6 +1,6 @@
 # gehenna
 
-## Awesome ES6 polyfills for Adobe scripting, including:
+Awesome ES6 polyfills for Adobe scripting, including:
 
 ### JSON
 
