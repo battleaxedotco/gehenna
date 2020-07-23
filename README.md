@@ -9,8 +9,15 @@ npm i gehenna
 ```
 
 ```js
-// To automatically load all utilies:
-async require('gehenna').default.init()
+import gehenna from "gehenna";
+
+// To automatically load all utilies (including app-specific helpers, if any):
+await gehenna();
+
+// Or promisified:
+gehenna().then(() => {
+  // Utilities now loaded
+});
 ```
 
 ### JSON
