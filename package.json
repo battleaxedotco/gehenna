@@ -4,7 +4,8 @@
   "description": "Awesome ES6 polyfills and mega utilities for Adobe scripting",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "convert": "node ./utils/convert.js"
   },
   "keywords": [],
   "author": "Thomas Scharstein II <tom@inventsable.cc>",

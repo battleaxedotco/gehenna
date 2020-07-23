@@ -1,45 +1,38 @@
-const fs = require("fs");
-const path = require("path");
-const spy = require("cep-spy").default;
+/**
+ * Gehenna is an async function which retrieves data saved locally to the module:
+ *
+ *      import gehenna from 'gehenna'
+ *      await gehenna()
+ *
+ * To see details about the functions themselves, see the root README or js files within ./lib
+ *
+ */
+
+// Gather data about current panel via cep-spy
+const spy = window.__adobe_cep__
+  ? require("cep-spy").default
+  : { appName: "ILST" };
 import { evalScript } from "cluecumber";
-let gehenna = {};
 
-function readDir(thispath) {
-  return new Promise((resolve, reject) => {
-    fs.readdir(path.resolve(thispath), { encoding: "utf-8" }, (err, files) => {
-      if (err) reject(err);
-      resolve(files);
-    });
-  });
-}
-
-gehenna["init"] = async function () {
+export default async function () {
+  //
+  // Require relative gehenna object created through `npm run convert` on root
+  const manifest = require("./utils/manifest.json");
   if (!window.__adobe_cep__) return null;
-  const root = `${__dirname}/node_modules/gehenna/lib/`.replace(/\\/gm, "/");
-  let files = await readDir(root);
-  files = files
-    .sort((a, b) => {
-      return /^\w{4}\.jsx$/i.test(a) ? 1 : /^\w{4}\.jsx$/i.test(b) ? -1 : 0;
-    })
-    .sort((a, b) => {
-      return /json/i.test(a) ? -1 : /json/i.test(b) ? 1 : 0;
-    })
-    .sort((a, b) => {
-      return /console/i.test(a) ? -1 : /console/i.test(b) ? 1 : 0;
-    })
-    .filter((file) => {
-      return (
-        !/^\w{4}\.jsx$/i.test(file) ||
-        (/^\w{4}\.jsx$/i.test(file) && new RegExp(spy.appName, "i").test(file))
-      );
-    });
-  for (var i = 0; i < files.length; i++) {
-    let file = files[i];
-    let data = fs.readFileSync(`${root}${file}`, "utf8");
-    await evalScript(data);
-    console.log(`Loading ${root}${file}`);
+  //
+  // Enumerate and evaluate keys in specific order, except if utility for a different host app
+  // i.e. -- Don't load AEFT.jsx if the panel is running in ILST
+  for (let key of manifest.keys.filter((file) => {
+    return (
+      !/^\w{4}$/i.test(file) ||
+      /JSON/i.test(file) ||
+      (/^\w{4}$/i.test(file) && new RegExp(spy.appName, "i").test(file))
+    );
+  })) {
+    //
+    // Asynchronously evaluate the raw string data and report back to user
+    await evalScript(manifest.data[key]);
+    console.log(`Loading ${key}.jsx`);
   }
   return true;
-};
-
-export default gehenna;
+}
