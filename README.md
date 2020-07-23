@@ -64,8 +64,11 @@ gehenna().then(() => {
 Retrieving a layer by a particular name is much better via `find()` since it won't cause a script to silently fail:
 
 ```js
-let vanillaFail = app.activeDocument.layers.getByName("test"); // if "test" does not exist, causes silent fail of entire script
-let newPass = get("layers").find((layer) => layer.name == "test"); // if "test" does not exist, returns null. Does not fail.
+let vanillaFail = app.activeDocument.layers.getByName("test");
+// if "test" does not exist, causes silent fail of entire script
+
+let newPass = get("layers").find((layer) => layer.name == "test");
+// if "test" does not exist, returns null. Does not fail.
 ```
 
 Since the `get()` utility in Illustrator turns collections into native arrays, we can use any ES6 Array methods on them. For instance retrieving all layers which begin with "Layer" can be done as easily as:
@@ -79,7 +82,7 @@ let genericallyNamedLayers = get("layers").filter((layer) => {
 Say we want to act on every `pathItem` within a specified layer:
 
 ```js
-// Reads "get [iterable key] of [parent]". If parent param is not included, it defaults to app.activeDocument
+// Reads "get [iterable key] of [parent]". If parent param is not included defaults to app.activeDocument
 get("pathItems", app.activeDocument.layers[1]).forEach((pathItem) => {
   alert(pathItem);
 });
