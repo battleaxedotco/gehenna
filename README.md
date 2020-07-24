@@ -1,6 +1,6 @@
 # gehenna
 
-Awesome ES6 polyfills and mega helpers for for Adobe scripting
+Awesome ES6 polyfills and mega helpers for Adobe scripting
 
 | [Installation](#installation) | [Arrays](#arrays) | [Objects](#objects) | [Numbers](#numbers) | [Strings](#strings) | [ILST](#illustrator) | [Examples](#examples) |
 | ----------------------------- | :---------------: | :-----------------: | :-----------------: | :-----------------: | :------------------: | :-------------------: |
