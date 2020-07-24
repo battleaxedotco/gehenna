@@ -100,6 +100,12 @@ let newPass = get("layers").find((layer) => layer.name == "test");
 // if "test" does not exist, returns null. Does not fail and continues executing code below this line.
 ```
 
+The above is also not limited to `name` prop alone and can query any valid property of the object in question, like if we want to select all layers with a "Light Red" label color:
+
+```js
+get("layers").filter((layer) => layer.color.toHex() == "#f05152");
+```
+
 Since the `get()` utility in Illustrator turns collections into native arrays, we can use any ES6 Array methods on them. For instance retrieving all layers which begin with "Layer" can be done as easily as:
 
 ```js
