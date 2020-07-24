@@ -27,12 +27,18 @@ gehenna().then(() => {
 
 #### Arrays
 
-- `Array.find()`
-- `Array.map()`
-- `Array.includes()`
-- `Array.forEach()`
-- `Array.flat()`
-- `Array.filter()`
+| Method                                                                                                        | Params              |                                                                                                                       Description |
+| :------------------------------------------------------------------------------------------------------------ | :------------------ | --------------------------------------------------------------------------------------------------------------------------------: |
+| [filter()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)     | callback `function` |                                    creates a new array with all elements that pass the test implemented by the provided function. |
+| [find()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find)         | callback `function` |                        returns the value of the first element in the provided array that satisfies the provided testing function. |
+| [flat()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat)         |                     |                       creates a new array with all sub-array elements concatenated into it recursively up to the specified depth. |
+| [forEach()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach)   | callback `function` |                                                                         executes a provided function once for each array element. |
+| [includes()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes) | value `any`         |                   determines whether an array includes a certain value among its entries, returning true or false as appropriate. |
+| [map()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)           | callback `function` |              creates a new array populated with the results of calling a provided function on every element in the calling array. |
+| max()                                                                                                         |                     |                                                                                        returns the highest numeric value in array |
+| min()                                                                                                         |                     |                                                                                         returns the lowest numeric value in array |
+| [reduce()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce)     | callback `function` |                    executes a reducer function (that you provide) on each element of the array, resulting in single output value. |
+| [some()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some)         | callback `function` | tests whether at least one element in the array passes the test implemented by the provided function. It returns a Boolean value. |
 
 #### Objects
 

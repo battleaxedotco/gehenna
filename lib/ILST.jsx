@@ -1,4 +1,66 @@
-console.log("Gehenna ILST loading...");
+RGBColor.prototype.create = function (red, green, blue) {
+  this.red = red;
+  this.green = green;
+  this.blue = blue;
+  return this;
+};
+RGBColor.prototype.fromHex = function (hex) {
+  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  this.red = parseInt(result[1], 16);
+  this.green = parseInt(result[2], 16);
+  this.blue = parseInt(result[3], 16);
+  return this;
+};
+RGBColor.prototype.toHex = function () {
+  return (
+    "#" +
+    ((1 << 24) + (this.red << 16) + (this.green << 8) + this.blue)
+      .toString(16)
+      .slice(1)
+  );
+};
+RGBColor.prototype.getString = function () {
+  return (
+    this.typename + "(" + this.red + "," + this.green + "," + this.blue + ")"
+  );
+};
+CMYKColor.prototype.create = function (cyan, magenta, yellow, black) {
+  this.cyan = cyan;
+  this.magenta = magenta;
+  this.yellow = yellow;
+  this.black = black;
+  return this;
+};
+CMYKColor.prototype.getString = function () {
+  return (
+    this.typename +
+    "(" +
+    this.cyan +
+    "," +
+    this.magenta +
+    "," +
+    this.yellow +
+    "," +
+    this.black +
+    ")"
+  );
+};
+LabColor.prototype.create = function (L, A, B) {
+  this.L = L;
+  this.A = A;
+  this.B = B;
+  return this;
+};
+LabColor.prototype.getString = function () {
+  return this.typename + "(" + this.L + "," + this.A + "," + this.B + ")";
+};
+GrayColor.prototype.create = function (value) {
+  this.gray = value;
+  return this;
+};
+GrayColor.prototype.getString = function () {
+  return this.typename + "(" + this.gray + ")";
+};
 
 /**
  * Agnostic getter function to convert Illustrator list items to ES6 native Arrays
@@ -16,57 +78,3 @@ function get(type, parent) {
   for (var i = 0; i < parent[type].length; i++) result.push(parent[type][i]);
   return result;
 }
-
-/**
- * Returns Illustrator colors as a more useful string format
- *
- * @param {Object} color - The fillColor/strokeColor target
- * @param {Boolean} asHex - Whether to return as hex value or native color model
- *
- * @returns {String} - As "RGBColor(255,0,0)" or "#ff0000"
- */
-function writeColorAsString(color, asHex) {
-  var type = color.typename;
-  var string;
-  if (!asHex) {
-    string = type + "(";
-    if (/rgb/i.test(type)) {
-      string += Math.ceil(color.red) + ",";
-      string += Math.ceil(color.green) + ",";
-      string += Math.ceil(color.blue) + ")";
-    } else if (/cmyk/i.test(type)) {
-      string += Math.ceil(color.cyan) + ",";
-      string += Math.ceil(color.magenta) + ",";
-      string += Math.ceil(color.yellow) + ",";
-      string += Math.ceil(color.black) + ")";
-    } else if (/gray/i.test(type)) {
-      string += Math.ceil(color.gray) + ")";
-    } else if (/hsb/i.test(type)) {
-      string += Math.ceil(color.hue) + ",";
-      string += Math.ceil(color.saturation) + ",";
-      string += Math.ceil(color.brightness) + ")";
-    } else if (/lab/i.test(type)) {
-      string += Math.ceil(color.L) + ",";
-      string += Math.ceil(color.A) + ",";
-      string += Math.ceil(color.B) + ")";
-    }
-  } else string = rgbToHex(color.red, color.green, color.blue);
-  return string.replace(/NaN/gm, "0") + "";
-}
-
-function rgbToHex(r, g, b) {
-  function componentToHex(c) {
-    var hex = c.toString(16);
-    return hex.length == 1 ? "0" + hex : hex;
-  }
-  return /string/.test(typeof r)
-    ? "#" + componentToHex(r) + componentToHex(g) + componentToHex(b)
-    : "#" +
-        r
-          .map((param) => {
-            componentToHex(param);
-          })
-          .join("");
-}
-
-console.log("Gehenna ILST loaded");
