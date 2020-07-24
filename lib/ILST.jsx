@@ -74,7 +74,40 @@ GrayColor.prototype.getString = function () {
 function get(type, parent) {
   if (arguments.length == 1 || !parent) parent = app.activeDocument;
   var result = [];
-  type = type.replace(/s$/, "") + "s";
-  for (var i = 0; i < parent[type].length; i++) result.push(parent[type][i]);
-  return result;
+  if (!parent[type]) return [];
+  for (var i = 0; i < parent[type].length; i++) {
+    result.push(parent[type][i]);
+    if (parent[type][i][type])
+      result = [].concat(result, get(type, parent[type][i]));
+  }
+  return result || [];
+}
+
+/**
+ *
+ * @param {String} string - Period delimited query string, such as "color.toHex()"
+ * @param {Object} propGroup - Parent object to query inside
+ *
+ * @returns {Any} The value of the query string
+ */
+
+function getProperty(string, propGroup) {
+  var propList = /\./.test(string) ? string.split(".") : [string];
+  var lastProp = null,
+    thisProp = null,
+    args = [];
+  propList.forEach(function (prop) {
+    lastProp = propGroup;
+    thisProp = prop.replace(/\(.*\)/, "");
+    if (/\(.{1,}\)/.test(prop))
+      args = prop.split(",").map(function (arg) {
+        return arg.trim();
+      });
+    propGroup = /function/.test(typeof propGroup[thisProp])
+      ? propGroup[thisProp].call(lastProp, args.slice())
+      : propGroup[prop]
+      ? propGroup[prop]
+      : propGroup;
+  });
+  return propGroup;
 }
