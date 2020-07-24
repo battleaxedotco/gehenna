@@ -75,12 +75,12 @@ gehenna().then(() => {
 
 #### Illustrator
 
-|                            |                                             |                                                                   |
-| :------------------------- | :------------------------------------------ | ----------------------------------------------------------------: |
-| `get()`                    | key `string`, parent? `object`              | universal getter converts any native collection to standard array |
-| `new RGBColor().create()`  | red `number`, green `number`, blue `number` |                                creates a new instance of RGBColor |
-| `new RGBColor().fromHex()` | hex `string`                                |                          creates RGBColor from a given Hex string |
-| `RGBColor().toHex()`       |                                             |                       returns hexadecimal string of current color |
+|                        |                                             |                                                                   |
+| :--------------------- | :------------------------------------------ | ----------------------------------------------------------------: |
+| `get()`                | key `string`, parent? `object`              | universal getter converts any native collection to standard array |
+| `RGBColor().create()`  | red `number`, green `number`, blue `number` |                                creates a new instance of RGBColor |
+| `RGBColor().fromHex()` | hex `string`                                |                          creates RGBColor from a given Hex string |
+| `RGBColor().toHex()`   |                                             |                       returns hexadecimal string of current color |
 
 ## Examples
 
