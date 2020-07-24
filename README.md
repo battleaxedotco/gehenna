@@ -2,7 +2,13 @@
 
 Awesome ES6 polyfills and mega helpers for for Adobe scripting
 
+| [Installation](#installation) | [Arrays](#arrays) | [Objects](#objects) | [Numbers](#numbers) | [Strings](#strings) | [ILST](#illustrator) | [Examples](#examples) |
+| ----------------------------- | :---------------: | :-----------------: | :-----------------: | :-----------------: | :------------------: | :-------------------: |
+
+
 ## Installation
+
+> 🚀 Using [brutalism](https://github.com/battleaxedotco/brutalism)? As of 2.0.9, Gehenna is automatically loaded before utils-folder from within Panel and there's no need to manually install it.
 
 ```bash
 npm i gehenna
