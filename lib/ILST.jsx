@@ -1,3 +1,6 @@
+// Illustrator reference:
+// https://illustrator-scripting-guide.readthedocs.io/
+
 RGBColor.prototype.create = function (red, green, blue) {
   this.red = red;
   this.green = green;

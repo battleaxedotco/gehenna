@@ -1,1 +1,2 @@
-console.log("Gehenna AEFT loaded");
+// After Effects reference
+// http://docs.aenhancers.com/
