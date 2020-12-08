@@ -31,8 +31,22 @@ export default async function () {
   })) {
     //
     // Asynchronously evaluate the raw string data and report back to user
-    await evalScript(manifest.data[key]);
-    console.log(`Loading ${key}.jsx`);
+    //
+    if (!/AEFT/i.test(spy.appName) && !/Arrays|Numbers|Objects/i.test(key)) {
+      console.log(`Loading ${key}.jsx`);
+      await evalScript(manifest.data[key]);
+      //
+      // But don't evaluate inside AE when risking global prototype leaks
+      //
+    } else if (
+      /AEFT/i.test(spy.appName) &&
+      !/Arrays|Numbers|Objects/i.test(key)
+    ) {
+      console.log(`Loading ${key}.jsx`);
+      await evalScript(manifest.data[key]);
+    } else {
+      console.log(`Skipping ${key}.jsx`);
+    }
   }
   return true;
 }

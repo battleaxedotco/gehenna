@@ -240,13 +240,16 @@ GrayColor.prototype.getString = function () {
  * @returns {Array} - An iterable array of Objects which can use advanced Array methods like find(), forEach()
  *
  */
-function get(type, parent) {
-  if (arguments.length == 1 || !parent) parent = app.activeDocument;
+function get(type, parent, deep) {
+  if (arguments.length == 1 || !parent) {
+    parent = app.activeDocument;
+    deep = true;
+  }
   var result = [];
   if (!parent[type]) return [];
   for (var i = 0; i < parent[type].length; i++) {
     result.push(parent[type][i]);
-    if (parent[type][i][type])
+    if (parent[type][i][type] && deep)
       result = [].concat(result, get(type, parent[type][i]));
   }
   return result || [];

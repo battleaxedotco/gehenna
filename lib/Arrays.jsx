@@ -1,3 +1,11 @@
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/isArray
+//
+if (!Array.isArray) {
+  Array.isArray = function (arg) {
+    return Object.prototype.toString.call(arg) === "[object Array]";
+  };
+}
+
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
 //
 Array.prototype.filter = function (callback) {
@@ -21,7 +29,7 @@ Array.prototype.flat = function () {
   function flattenArrayOfArrays(a, r) {
     if (!r) r = [];
     for (var i = 0; i < a.length; i++)
-      if (a[i].constructor == Array) r.concat(flattenArrayOfArrays(a[i], r));
+      if (Array.isArray(a[i])) r.concat(flattenArrayOfArrays(a[i], r));
       else r.push(a[i]);
     return r;
   }
