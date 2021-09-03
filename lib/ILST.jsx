@@ -250,9 +250,9 @@ function get(type, parent, deep) {
   for (var i = 0; i < parent[type].length; i++) {
     result.push(parent[type][i]);
     if (parent[type][i][type] && deep)
-      result = [].concat(result, get(type, parent[type][i]));
+      result = [].concat(result, get(type, parent[type][i], deep));
   }
-  return result || [];
+  return result;
 }
 
 /**
