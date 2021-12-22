@@ -12,7 +12,7 @@
 const spy = window.__adobe_cep__
   ? require("cep-spy").default
   : { appName: "ILST" };
-import { evalScript } from "workaround";
+import { evalScript } from "cluecumber";
 
 export default async function () {
   //
